@@ -3,6 +3,7 @@ package com.example.dicerollerapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
@@ -12,6 +13,8 @@ class MainActivity : AppCompatActivity() {
 
         val rollButton: Button = findViewById(R.id.buttonRoll)
         rollButton.setOnClickListener { rollDice() }
+
+        rollDice()
     }
 
     private fun rollDice() {
@@ -20,8 +23,18 @@ class MainActivity : AppCompatActivity() {
         val nroSide = dice.roll()
 
         //le da el valor aleatorio de una cara al textview
-        val text: TextView = findViewById(R.id.textView)
-        text.text = nroSide.toString()
+        val dado: ImageView = findViewById(R.id.imageView)
+
+        val imageResource = when (nroSide) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> {R.drawable.dice_6}
+        }
+
+        dado.setImageResource(imageResource)
     }
 
     class Dice(val nroSides: Int) {
